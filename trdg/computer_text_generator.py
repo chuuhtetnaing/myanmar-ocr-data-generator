@@ -1,4 +1,5 @@
 import random as rnd
+import re
 from typing import Tuple
 from PIL import Image, ImageColor, ImageDraw, ImageFilter, ImageFont
 
@@ -19,6 +20,41 @@ TH_UNDER_VOWELS = ["0xe38", "0xe39", "\0xe3A"]
 TH_UPPER_VOWELS = ["0xe31", "0xe34", "0xe35", "0xe36", "0xe37"]
 
 
+def create_break_pattern():
+    """Creates and returns the regular expression pattern for Myanmar syllable breaking."""
+    my_consonant = r"က-အ"
+    # en_char = r"a-zA-Z0-9"
+
+    other_char = r"ဣဤဥဦဧဩဪဿ၌၍၏၀-၉၊။"
+    subscript_symbol = r'္'
+    a_that = r'်'
+
+    # Regular expression pattern for Myanmar syllable breaking
+    return re.compile(
+        r"((?<!" + subscript_symbol + r")[" + my_consonant + r"]"
+        r"(?!["
+        + a_that + subscript_symbol + r"])"
+        + r"|[" + other_char + r"])"
+    )
+
+def break_syllables(line, break_pattern, separator):
+    """Applie
+    s syllable breaking rules to a line."""
+    line = re.sub(r'\s+', ' ', line.strip()) # Normalize space
+    segmented_line = break_pattern.sub(separator + r"\1", line)
+
+    # Remove the leading delimiter if it exists
+    if segmented_line.startswith(separator):
+        segmented_line = segmented_line[len(separator):]
+
+    # Replace delimiter+space+delimiter with a single space
+    double_delimiter = separator + " " + separator
+    segmented_line = segmented_line.replace(double_delimiter, " ")
+
+    return segmented_line
+
+break_pattern = create_break_pattern()
+
 def generate(
     text: str,
     font: str,
@@ -31,6 +67,7 @@ def generate(
     word_split: bool,
     stroke_width: int = 0,
     stroke_fill: str = "#282828",
+    language: str = "mm"
 ) -> Tuple:
     if orientation == 0:
         return _generate_horizontal_text(
@@ -44,6 +81,7 @@ def generate(
             word_split,
             stroke_width,
             stroke_fill,
+            language,
         )
     elif orientation == 1:
         return _generate_vertical_text(
@@ -56,6 +94,7 @@ def generate(
             fit,
             stroke_width,
             stroke_fill,
+            language,
         )
     else:
         raise ValueError("Unknown orientation " + str(orientation))
@@ -70,6 +109,14 @@ def _compute_character_width(image_font: ImageFont, character: str) -> int:
     # Casting as int to preserve the old behavior
     return round(image_font.getlength(character))
 
+def _split(text):
+    text = text.strip()
+    seperator = "|X|"
+
+    result = break_syllables(text, break_pattern, seperator)
+    result = result.split(seperator)
+
+    return result
 
 def _generate_horizontal_text(
     text: str,
@@ -82,6 +129,7 @@ def _generate_horizontal_text(
     word_split: bool,
     stroke_width: int = 0,
     stroke_fill: str = "#282828",
+    language: str = "mm"
 ) -> Tuple:
     image_font = ImageFont.truetype(font=font, size=font_size)
 
@@ -95,6 +143,9 @@ def _generate_horizontal_text(
         splitted_text.pop()
     else:
         splitted_text = text
+
+    if language == "mm":
+        splitted_text = _split(splitted_text)
 
     piece_widths = [
         _compute_character_width(image_font, p) if p != " " else space_width
@@ -165,10 +216,14 @@ def _generate_vertical_text(
     fit: bool,
     stroke_width: int = 0,
     stroke_fill: str = "#282828",
+    language: str = "mm"
 ) -> Tuple:
     image_font = ImageFont.truetype(font=font, size=font_size)
 
     space_height = int(get_text_height(image_font, " ") * space_width)
+
+    if language == "mm":
+        text = _split(text)
 
     char_heights = [
         get_text_height(image_font, c) if c != " " else space_height for c in text

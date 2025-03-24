@@ -469,6 +469,7 @@ def main():
                 [args.stroke_fill] * string_count,
                 [args.image_mode] * string_count,
                 [args.output_bboxes] * string_count,
+                [args.language] * string_count,
             ),
         ),
         total=args.count,

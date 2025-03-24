@@ -54,7 +54,9 @@ class FakeTextDataGenerator(object):
         stroke_fill: str = "#282828",
         image_mode: str = "RGB",
         output_bboxes: int = 0,
+        language: str = "mm"
     ) -> Image:
+        print("## text ##", text)
         image = None
 
         margin_top, margin_left, margin_bottom, margin_right = margins
@@ -81,6 +83,7 @@ class FakeTextDataGenerator(object):
                 word_split,
                 stroke_width,
                 stroke_fill,
+                language
             )
         random_angle = rnd.randint(0 - skewing_angle, skewing_angle)
 
