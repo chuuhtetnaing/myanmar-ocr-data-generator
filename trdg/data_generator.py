@@ -56,7 +56,6 @@ class FakeTextDataGenerator(object):
         output_bboxes: int = 0,
         language: str = "mm"
     ) -> Image:
-        print("## text ##", text)
         image = None
 
         margin_top, margin_left, margin_bottom, margin_right = margins
