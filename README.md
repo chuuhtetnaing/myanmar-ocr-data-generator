@@ -33,6 +33,13 @@ pip install -r requirements.txt
 
 ## Usage
 
+### Prerequisites
+
+Before using the tool with Myanmar language, you need to generate the Myanmar dictionary file:
+
+1. Run the dictionary generation notebook (notebook/generate-dictionary.ipynb) to generate the `my.txt` dictionary file
+2. Place the `my.txt` dictionary file in `trdg/dicts/`
+
 ### Command Line Interface
 
 Generate random Myanmar text images:
