@@ -54,7 +54,7 @@ class FakeTextDataGenerator(object):
         stroke_fill: str = "#282828",
         image_mode: str = "RGB",
         output_bboxes: int = 0,
-        language: str = "mm"
+        language: str = "my"
     ) -> Image:
         image = None
 

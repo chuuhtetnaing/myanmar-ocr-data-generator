@@ -67,7 +67,7 @@ def generate(
     word_split: bool,
     stroke_width: int = 0,
     stroke_fill: str = "#282828",
-    language: str = "mm"
+    language: str = "my"
 ) -> Tuple:
     if orientation == 0:
         return _generate_horizontal_text(
@@ -129,7 +129,7 @@ def _generate_horizontal_text(
     word_split: bool,
     stroke_width: int = 0,
     stroke_fill: str = "#282828",
-    language: str = "mm"
+    language: str = "my"
 ) -> Tuple:
     image_font = ImageFont.truetype(font=font, size=font_size)
 
@@ -144,7 +144,7 @@ def _generate_horizontal_text(
     else:
         splitted_text = text
 
-    if language == "mm":
+    if language == "my":
         splitted_text = _split(splitted_text)
 
     piece_widths = [
@@ -216,13 +216,13 @@ def _generate_vertical_text(
     fit: bool,
     stroke_width: int = 0,
     stroke_fill: str = "#282828",
-    language: str = "mm"
+    language: str = "my"
 ) -> Tuple:
     image_font = ImageFont.truetype(font=font, size=font_size)
 
     space_height = int(get_text_height(image_font, " ") * space_width)
 
-    if language == "mm":
+    if language == "my":
         text = _split(text)
 
     char_heights = [
