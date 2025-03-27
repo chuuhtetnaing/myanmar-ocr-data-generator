@@ -102,3 +102,7 @@ ENV/
 
 .vscode/*
 .idea/*
+notebook/paddleocr/data/*
+notebook/paddleocr/dataset/*
+notebook/paddleocr/images/*
+trdg/out/*

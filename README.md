@@ -37,7 +37,7 @@ pip install -r requirements.txt
 
 Before using the tool with Myanmar language, you need to generate the Myanmar dictionary file:
 
-1. Run the dictionary generation notebook (notebook/generate-dictionary.ipynb) to generate the `my.txt` dictionary file
+1. Run the sample dictionary generation notebook (notebook/generate-dictionary.ipynb) to generate the `my.txt` dictionary file
 2. Place the `my.txt` dictionary file in `trdg/dicts/`
 
 ### Command Line Interface
@@ -123,6 +123,13 @@ Maybe you want another background? Add `-b` (`python3 run.py -c 1 -w 5 -f 64 -b 
 ![23](samples/mm-23.jpg "3")
 
 When using image background (3). A image from the images/ folder will be randomly selected and the text will be written on it.
+
+### Generate Large Synthetics Data for PaddleOCR Training
+
+Please use the following scripts and notebook under `notebook/paddleocr` to generate data for the PaddleOCR format.
+- Run the `generate-dictionary.ipynb` notebook to generate corpus for training from `chuuhtetnaing/wikipedia` and `facebook/flores` datasets.
+- `1. generate.py` script to generate the synthetics OCR dataset.
+- `2. create-lable-for-hf.py` and `3. upload-to-huggingface.py` scripts to create the lable for huggingface format and upload to huggingface. _(If you don't wanna upload to huggingface, please skip these scripts)_
 
 ## Acknowledgments
 
