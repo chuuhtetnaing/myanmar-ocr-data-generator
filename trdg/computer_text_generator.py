@@ -2,6 +2,7 @@ import random as rnd
 import re
 from typing import Tuple
 from PIL import Image, ImageColor, ImageDraw, ImageFilter, ImageFont
+from pathlib import Path
 
 from trdg.utils import get_text_width, get_text_height
 

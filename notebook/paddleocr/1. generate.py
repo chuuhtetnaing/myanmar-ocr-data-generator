@@ -77,7 +77,7 @@ def generate_images_parallel(corpus, output_dir, dataset_type, image_params, num
     print(f"Generated {successful} images with annotations in {dataset_type}")
 
 
-def shuffle_and_split(data, train_ratio=0.9):
+def shuffle_and_split(data, train_ratio=0.9999):
     # Create a copy of the list to avoid modifying the original
     shuffled_data = data.copy()
 
@@ -97,7 +97,7 @@ def shuffle_and_split(data, train_ratio=0.9):
 if __name__ == "__main__":
     
     logger.info("Split into Train and Test Dataset...")
-    with open("data/my_corpus.txt") as file:
+    with open("data/my_corpus_4_datasets.txt") as file:
         my_corpus = file.read().split("\n")
     
     my_corpus_train, my_corpus_test = shuffle_and_split(my_corpus)
@@ -143,7 +143,7 @@ if __name__ == "__main__":
     ## Skew Images
     logger.info("Generate Skew Images...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 0,
         "distorsion_orientation": 0,
@@ -163,7 +163,7 @@ if __name__ == "__main__":
     ### 1. (distorsion_type: 1, distorsion_orientation: 0)
     logger.info("Generate Distorsion Images 1...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 1,
         "distorsion_orientation": 0,
@@ -179,7 +179,7 @@ if __name__ == "__main__":
     ### 2. (distorsion_type: 1, distorsion_orientation: 1)
     logger.info("Generate Distorsion Images 2...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 1,
         "distorsion_orientation": 1,
@@ -195,7 +195,7 @@ if __name__ == "__main__":
     ### 3. (distorsion_type: 1, distorsion_orientation: 2)
     logger.info("Generate Distorsion Images 3...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 1,
         "distorsion_orientation": 2,
@@ -211,7 +211,7 @@ if __name__ == "__main__":
     ### 4. (distorsion_type: 2, distorsion_orientation: 0)
     logger.info("Generate Distorsion Images 4...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 2,
         "distorsion_orientation": 0,
@@ -227,7 +227,7 @@ if __name__ == "__main__":
     ### 5. (distorsion_type: 2, distorsion_orientation: 1)
     logger.info("Generate Distorsion Images 5...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 2,
         "distorsion_orientation": 1,
@@ -243,7 +243,7 @@ if __name__ == "__main__":
     ### 6. (distorsion_type: 2, distorsion_orientation: 2)
     logger.info("Generate Distorsion Images 6...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 2,
         "distorsion_orientation": 2,
@@ -259,7 +259,7 @@ if __name__ == "__main__":
     ### 7. (distorsion_type: 3, distorsion_orientation: 0)
     logger.info("Generate Distorsion Images 7...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 3,
         "distorsion_orientation": 0,
@@ -275,7 +275,7 @@ if __name__ == "__main__":
     ### 8. (distorsion_type: 3, distorsion_orientation: 1)
     logger.info("Generate Distorsion Images 8...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 3,
         "distorsion_orientation": 1,
@@ -291,7 +291,7 @@ if __name__ == "__main__":
     ### 9. (distorsion_type: 3, distorsion_orientation: 2)
     logger.info("Generate Distorsion Images 9...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 3,
         "distorsion_orientation": 2,
@@ -349,42 +349,42 @@ if __name__ == "__main__":
     generate_images_parallel(my_corpus[:25_000], output_dir, dataset_type, image_params)
     
     ### 3. (blur: 2)
-    logger.info("Generate Blur Images 3...")
-    image_params = {
-        "skewing_angle": 0,
-        "random_skew": False,
-        "distorsion_type": 0,
-        "distorsion_orientation": 0,
-        "blur": 2,
-        "random_blur": False,
-        "background_type": 0
-    }
+    # logger.info("Generate Blur Images 3...")
+    # image_params = {
+    #     "skewing_angle": 0,
+    #     "random_skew": False,
+    #     "distorsion_type": 0,
+    #     "distorsion_orientation": 0,
+    #     "blur": 2,
+    #     "random_blur": False,
+    #     "background_type": 0
+    # }
 
-    with open("data/my_corpus_train.txt") as file:
-        my_corpus = file.read().split("\n")
+    # with open("data/my_corpus_train.txt") as file:
+    #     my_corpus = file.read().split("\n")
 
-    random.shuffle(my_corpus)
+    # random.shuffle(my_corpus)
 
-    generate_images_parallel(my_corpus[:25_000], output_dir, dataset_type, image_params)
+    # generate_images_parallel(my_corpus[:25_000], output_dir, dataset_type, image_params)
     
     ### 4. (blur: 4)
-    logger.info("Generate Blur Images 4...")
-    image_params = {
-        "skewing_angle": 0,
-        "random_skew": False,
-        "distorsion_type": 0,
-        "distorsion_orientation": 0,
-        "blur": 4,
-        "random_blur": False,
-        "background_type": 0
-    }
+    # logger.info("Generate Blur Images 4...")
+    # image_params = {
+    #     "skewing_angle": 0,
+    #     "random_skew": False,
+    #     "distorsion_type": 0,
+    #     "distorsion_orientation": 0,
+    #     "blur": 4,
+    #     "random_blur": False,
+    #     "background_type": 0
+    # }
 
-    with open("data/my_corpus_train.txt") as file:
-        my_corpus = file.read().split("\n")
+    # with open("data/my_corpus_train.txt") as file:
+    #     my_corpus = file.read().split("\n")
 
-    random.shuffle(my_corpus)
+    # random.shuffle(my_corpus)
 
-    generate_images_parallel(my_corpus[:25_000], output_dir, dataset_type, image_params)
+    # generate_images_parallel(my_corpus[:25_000], output_dir, dataset_type, image_params)
     
 
     
@@ -460,7 +460,8 @@ if __name__ == "__main__":
         "distorsion_orientation": 0,
         "blur": 0,
         "random_blur": False,
-        "background_type": 3
+        "background_type": 3,
+        "image_dir": "/home/chuu/Documents/myanmar-ocr-data-generator/trdg/images"
     }
 
     with open("data/my_corpus_train.txt") as file:
@@ -508,7 +509,7 @@ if __name__ == "__main__":
     ## Skew Images
     logger.info("Generate Skew Images...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 0,
         "distorsion_orientation": 0,
@@ -528,7 +529,7 @@ if __name__ == "__main__":
     ### 1. (distorsion_type: 1, distorsion_orientation: 0)
     logger.info("Generate Distorsion Images 1...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 1,
         "distorsion_orientation": 0,
@@ -544,7 +545,7 @@ if __name__ == "__main__":
     ### 2. (distorsion_type: 1, distorsion_orientation: 1)
     logger.info("Generate Distorsion Images 2...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 1,
         "distorsion_orientation": 1,
@@ -560,7 +561,7 @@ if __name__ == "__main__":
     ### 3. (distorsion_type: 1, distorsion_orientation: 2)
     logger.info("Generate Distorsion Images 3...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 1,
         "distorsion_orientation": 2,
@@ -576,7 +577,7 @@ if __name__ == "__main__":
     ### 4. (distorsion_type: 2, distorsion_orientation: 0)
     logger.info("Generate Distorsion Images 4...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 2,
         "distorsion_orientation": 0,
@@ -592,7 +593,7 @@ if __name__ == "__main__":
     ### 5. (distorsion_type: 2, distorsion_orientation: 1)
     logger.info("Generate Distorsion Images 5...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 2,
         "distorsion_orientation": 1,
@@ -608,7 +609,7 @@ if __name__ == "__main__":
     ### 6. (distorsion_type: 2, distorsion_orientation: 2)
     logger.info("Generate Distorsion Images 6...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 2,
         "distorsion_orientation": 2,
@@ -624,7 +625,7 @@ if __name__ == "__main__":
     ### 7. (distorsion_type: 3, distorsion_orientation: 0)
     logger.info("Generate Distorsion Images 7...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 3,
         "distorsion_orientation": 0,
@@ -640,7 +641,7 @@ if __name__ == "__main__":
     ### 8. (distorsion_type: 3, distorsion_orientation: 1)
     logger.info("Generate Distorsion Images 8...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 3,
         "distorsion_orientation": 1,
@@ -656,7 +657,7 @@ if __name__ == "__main__":
     ### 9. (distorsion_type: 3, distorsion_orientation: 2)
     logger.info("Generate Distorsion Images 9...")
     image_params = {
-        "skewing_angle": 5,
+        "skewing_angle": 3,
         "random_skew": True,
         "distorsion_type": 3,
         "distorsion_orientation": 2,
@@ -714,42 +715,42 @@ if __name__ == "__main__":
     generate_images_parallel(my_corpus[:2_500], output_dir, dataset_type, image_params)
     
     ### 3. (blur: 2)
-    logger.info("Generate Blur Images 3...")
-    image_params = {
-        "skewing_angle": 0,
-        "random_skew": False,
-        "distorsion_type": 0,
-        "distorsion_orientation": 0,
-        "blur": 2,
-        "random_blur": False,
-        "background_type": 0
-    }
+    # logger.info("Generate Blur Images 3...")
+    # image_params = {
+    #     "skewing_angle": 0,
+    #     "random_skew": False,
+    #     "distorsion_type": 0,
+    #     "distorsion_orientation": 0,
+    #     "blur": 2,
+    #     "random_blur": False,
+    #     "background_type": 0
+    # }
 
-    with open("data/my_corpus_train.txt") as file:
-        my_corpus = file.read().split("\n")
+    # with open("data/my_corpus_train.txt") as file:
+    #     my_corpus = file.read().split("\n")
 
-    random.shuffle(my_corpus)
+    # random.shuffle(my_corpus)
 
-    generate_images_parallel(my_corpus[:2_500], output_dir, dataset_type, image_params)
+    # generate_images_parallel(my_corpus[:2_500], output_dir, dataset_type, image_params)
     
     ### 4. (blur: 4)
-    logger.info("Generate Blur Images 4...")
-    image_params = {
-        "skewing_angle": 0,
-        "random_skew": False,
-        "distorsion_type": 0,
-        "distorsion_orientation": 0,
-        "blur": 4,
-        "random_blur": False,
-        "background_type": 0
-    }
+    # logger.info("Generate Blur Images 4...")
+    # image_params = {
+    #     "skewing_angle": 0,
+    #     "random_skew": False,
+    #     "distorsion_type": 0,
+    #     "distorsion_orientation": 0,
+    #     "blur": 4,
+    #     "random_blur": False,
+    #     "background_type": 0
+    # }
 
-    with open("data/my_corpus_train.txt") as file:
-        my_corpus = file.read().split("\n")
+    # with open("data/my_corpus_train.txt") as file:
+    #     my_corpus = file.read().split("\n")
 
-    random.shuffle(my_corpus)
+    # random.shuffle(my_corpus)
 
-    generate_images_parallel(my_corpus[:2_500], output_dir, dataset_type, image_params)
+    # generate_images_parallel(my_corpus[:2_500], output_dir, dataset_type, image_params)
     
 
     
@@ -825,7 +826,8 @@ if __name__ == "__main__":
         "distorsion_orientation": 0,
         "blur": 0,
         "random_blur": False,
-        "background_type": 3
+        "background_type": 3,
+        "image_dir": "/home/chuu/Documents/myanmar-ocr-data-generator/trdg/images"
     }
 
     with open("data/my_corpus_train.txt") as file:
